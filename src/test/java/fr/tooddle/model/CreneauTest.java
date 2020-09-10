@@ -1,4 +1,4 @@
-package tooddle;
+package fr.tooddle.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -64,6 +64,23 @@ class CreneauTest {
 
 		// THEN
 		assertThat(duree).hasHours(nDuration);
+	}
+
+	@Test
+	void givenTwoEquivalentCreneau_thenObtainEquality() {
+		// GIVEN
+		final var startDate = LocalDateTime.of(2020, 9, 5, 10, 0);
+		final var equivStartDate = LocalDateTime.of(2020, 9, 5, 8, 0).plusHours(2);
+
+		final var endDate = LocalDateTime.of(2020, 9, 5, 11, 0);
+		final var equivEndDate = LocalDateTime.of(2020, 9, 5, 9, 0).plusHours(2);
+
+		// WHEN
+		final var creneau = new Creneau(startDate, endDate);
+		final var equivCreneau = new Creneau(equivStartDate, equivEndDate);
+		// THEN
+		assertThat(creneau).isEqualTo(equivCreneau);
+
 	}
 
 }
