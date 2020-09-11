@@ -32,6 +32,28 @@ class SondageTest {
 	}
 
 	@Test
+	void givenMinimalInfos_WhenCreateSondage_ThenHasAUUID() {
+		// GIVEN / WHEN -> BeforeEach
+
+		// THEN
+		assertThat(sondage.getId()).isNotBlank();
+
+	}
+
+	@Test
+	void givenAnotherSondage_whenGetId_ThenGetDifferentId() {
+		// GIVEN
+		final Sondage sondage2 = new Sondage(emailCreateur, titre);
+
+		// WHEN
+		final String id2 = sondage2.getId();
+
+		// THEN
+		assertThat(id2).isNotEqualTo(sondage.getId());
+
+	}
+
+	@Test
 	void givenSondageWithCreneaux_WhenDiffuser_ThenStatusIsDiffusion() {
 		// GIVEN
 		final LocalDateTime baseTime1 = LocalDateTime.now().plusDays(1);

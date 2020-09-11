@@ -10,7 +10,14 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-class CreneauTest {
+public class CreneauTest {
+
+	private static LocalDateTime TEST_BASE_TIME = LocalDateTime.of(2020, 9, 5, 8, 0);
+
+	public static final Creneau[] TEST_CRENEAU_LIST = {
+			new Creneau(TEST_BASE_TIME, TEST_BASE_TIME.plusHours(2)),
+			new Creneau(TEST_BASE_TIME.plusDays(1), TEST_BASE_TIME.plusDays(1).plusHours(2)),
+			new Creneau(TEST_BASE_TIME.plusDays(2), TEST_BASE_TIME.plusDays(2).plusHours(2)) };
 
 	// Un créneau est une durée caractérisée par une heure de début
 	// et une heure de fin strictement supérieure. Sa durée peut être calculée.
@@ -56,7 +63,7 @@ class CreneauTest {
 	@ValueSource(ints = { 2, 3, 4 })
 	void givenCreneauFrom8And8PlusN_whenGetDuration_thenGetNhours(int nDuration) {
 		// GIVEN
-		final var fromDate = LocalDateTime.of(2020, 9, 5, 8, 0);
+		final var fromDate = TEST_BASE_TIME;
 		final var creneau = new Creneau(fromDate, fromDate.plusHours(nDuration));
 
 		// WHEN

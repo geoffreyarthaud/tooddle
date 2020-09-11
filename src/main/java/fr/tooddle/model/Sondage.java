@@ -2,8 +2,8 @@ package fr.tooddle.model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 public class Sondage {
 
@@ -11,8 +11,10 @@ public class Sondage {
 	private final String titre;
 	private SondageStatus status;
 	private final List<Creneau> creneaux;
+	private final String id;
 
 	public Sondage(String emailCreateur, String titre) {
+		id = UUID.randomUUID().toString();
 		this.emailCreateur = emailCreateur;
 		this.titre = titre;
 		status = SondageStatus.LANCEMENT;
@@ -43,8 +45,12 @@ public class Sondage {
 		status = SondageStatus.DIFFUSION;
 	}
 
-	public Collection<Creneau> getCreneaux() {
+	public List<Creneau> getCreneaux() {
 		return new ArrayList<>(creneaux);
+	}
+
+	public String getId() {
+		return id;
 	}
 
 }
